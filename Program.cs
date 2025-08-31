@@ -1,6 +1,7 @@
 ﻿public class Program {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Goku");
+        Main main = new Main();
+        main.Menu();
     }
 }

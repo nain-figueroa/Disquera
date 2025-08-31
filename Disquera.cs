@@ -80,8 +80,9 @@ public class Disquera
         Console.Clear();
         for (int i = 0; i < this.discos.Length; i++)
         {
-            Console.WriteLine($"Nombre: {this.discos[i].sNombreDisco} | Precio: {this.discos[i].dPrecio} | Cantidad de canciones: {this.discos[i].nCantidadCanciones} | Fecha: {this.discos[i].doFechaCompra}");
+            Console.WriteLine($"Nombre: {this.discos[i].sNombreDisco} | Precio: ${this.discos[i].dPrecio} | Cantidad de canciones: {this.discos[i].nCantidadCanciones} | Fecha: {this.discos[i].doFechaCompra.ToString("dd/MM/yyyy")}");
         }
+        Console.WriteLine("Presione cualquier tecla para volver...");
         Console.ReadKey();
     }
 

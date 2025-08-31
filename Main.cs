@@ -17,7 +17,7 @@ public class Main
         do
         {
             Console.Clear();
-            Console.WriteLine("MENU\n(1)Agregar Disco\n(2)Eliminar Disco\n(3)Eliminar\n(0)Salir");
+            Console.WriteLine("MENU\n(1)Agregar Disco\n(2)Eliminar Disco\n(3)Mostratr Discos\n(0)Salir");
             op = int.Parse(Console.ReadLine());
             switch (op)
             {
@@ -49,6 +49,7 @@ public class Main
                     }
                     break;
                 case 2:
+                    Console.Clear();
                     Console.WriteLine("Disco a Eliminar: ");
                     String sDisco = Console.ReadLine();
                     this.disquera.EliminarDisco(sDisco);

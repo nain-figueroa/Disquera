@@ -17,7 +17,7 @@ public class Main
         do
         {
             Console.Clear();
-            Console.WriteLine("MENU\n(1)Agregar Disco\n(2)Eliminar Disco\n(3)Mostratr Discos\n(0)Salir");
+            Console.WriteLine("MENU\n(1)Agregar Disco\n(2)Eliminar Disco\n(3)Mostrar Discos\n(0)Salir");
             op = int.Parse(Console.ReadLine());
             switch (op)
             {

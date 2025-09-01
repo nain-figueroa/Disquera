@@ -37,8 +37,22 @@ public class Main
                             this.disco.nCantidadCanciones = Int32.Parse(Console.ReadLine());
                             Console.WriteLine("Precio: ");
                             this.disco.dPrecio = Double.Parse(Console.ReadLine());
-                            this.disco.doFechaCompra = DateTime.Today;
-                            this.disquera.AgregarDisco(this.disco);
+                            Console.WriteLine("Fecha de compra(dd/mm/yyyy):");
+                            while (true)
+                            {
+                                if (DateTime.TryParse(Console.ReadLine(), out DateTime fecha))
+                                {
+                                    this.disco.doFechaCompra = fecha;
+                                    this.disquera.AgregarDisco(this.disco);
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Fecha invalida");
+                                    Console.ReadKey();
+                                }
+                            }
+                            ;
                         }
                         catch (System.Exception ex)
                         {

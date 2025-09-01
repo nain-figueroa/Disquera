@@ -78,9 +78,22 @@ public class Disquera
     public void MostrarDisco()
     {
         Console.Clear();
-        for (int i = 0; i < this.discos.Length; i++)
+        Console.WriteLine("Nombre del disco a buscar (Escriba 'todos' para mostrar todos los discos):");
+        String sDisco = Console.ReadLine();
+        if (sDisco == "todos")
         {
-            Console.WriteLine($"Nombre: {this.discos[i].sNombreDisco} | Precio: ${this.discos[i].dPrecio} | Cantidad de canciones: {this.discos[i].nCantidadCanciones} | Fecha: {this.discos[i].doFechaCompra.ToString("dd/MM/yyyy")}");
+            for (int i = 0; i < this.discos.Length; i++)
+            {
+                Console.WriteLine($"Nombre: {this.discos[i].sNombreDisco} | Precio: ${this.discos[i].dPrecio} | Cantidad de canciones: {this.discos[i].nCantidadCanciones} | Fecha: {this.discos[i].doFechaCompra.ToString("dd/MM/yyyy")}");
+            }
+        }
+        else
+        {
+            Int32[] nIndices = this.BuscarDisco(sDisco);
+            for (int i = 0; i < nIndices.Length; i++)
+            {
+                Console.WriteLine($"Nombre: {this.discos[nIndices[i]].sNombreDisco} | Precio: ${this.discos[nIndices[i]].dPrecio} | Cantidad de canciones: {this.discos[nIndices[i]].nCantidadCanciones} | Fecha: {this.discos[nIndices[i]].doFechaCompra.ToString("dd/MM/yyyy")}");
+            }
         }
         Console.WriteLine("Presione cualquier tecla para volver...");
         Console.ReadKey();

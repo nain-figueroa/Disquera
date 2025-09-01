@@ -6,7 +6,7 @@ public class Disquera
 
     public Disquera()
     {
-        this.nCantidadMaxima = 1;
+        this.nCantidadMaxima = 0;
         this.discos = new Disco[this.nCantidadMaxima];
         this.nContador = 0;
     }
@@ -28,51 +28,58 @@ public class Disquera
 
     public void EliminarDisco(String sNombreDisco)
     {
-        Int32[] nIndices = this.BuscarDisco(sNombreDisco);
-        if (nIndices.Length > 1)
+        if (this.discos.Length > 0)
         {
-            Console.Clear();
-            Console.WriteLine("MÁS DE UN DISCO COINCIDE CON EL NOMBRE");
-            for (int i = 0; i < nIndices.Length; i++)
+            Int32[] nIndices = this.BuscarDisco(sNombreDisco);
+            if (nIndices.Length > 1)
             {
-                Console.WriteLine($"{i + 1}.-{this.discos[nIndices[i]].sNombreDisco}, {this.discos[nIndices[i]].nCantidadCanciones}");
-            }
-            Console.WriteLine("Escoja el disco a eliminar: ");
-            try
-            {
-                Int32 op = Int32.Parse(Console.ReadLine());
-                this.discos[nIndices[op - 1]].sNombreDisco = "<Null>";
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex);
-                Console.WriteLine("=====PRESIONE CUALQUIER TECLA PARA VOLVER AL MENÚ=====");
-                Console.ReadKey();
-            }
-        }
-        else
-        {
-            this.discos[nIndices[0]].sNombreDisco = "<Null>";
-        }
-
-        Disco[] discos = new Disco[this.nContador - 1];
-        Int32 j = 0;
-        for (int i = 0; i < discos.Length; i++)
-        {
-            if (this.discos[i].sNombreDisco == "<Null>")
-            {
-                j++;
-                discos[i] = this.discos[j];
+                Console.Clear();
+                Console.WriteLine("MÁS DE UN DISCO COINCIDE CON EL NOMBRE");
+                for (int i = 0; i < nIndices.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}.-{this.discos[nIndices[i]].sNombreDisco}, {this.discos[nIndices[i]].nCantidadCanciones}");
+                }
+                Console.WriteLine("Escoja el disco a eliminar: ");
+                try
+                {
+                    Int32 op = Int32.Parse(Console.ReadLine());
+                    this.discos[nIndices[op - 1]].sNombreDisco = "<Null>";
+                }
+                catch (System.Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    Console.WriteLine("=====PRESIONE CUALQUIER TECLA PARA VOLVER AL MENÚ=====");
+                    Console.ReadKey();
+                }
             }
             else
             {
-                discos[i] = this.discos[j];
+                this.discos[nIndices[0]].sNombreDisco = "<Null>";
             }
-            j++;
+
+            Disco[] discos = new Disco[this.nContador - 1];
+            Int32 j = 0;
+            for (int i = 0; i < discos.Length; i++)
+            {
+                if (this.discos[i].sNombreDisco == "<Null>")
+                {
+                    j++;
+                    discos[i] = this.discos[j];
+                }
+                else
+                {
+                    discos[i] = this.discos[j];
+                }
+                j++;
+            }
+            this.discos = discos;
+            this.nContador--;
+            this.nCantidadMaxima--;
         }
-        this.discos = discos;
-        this.nContador--;
-        this.nCantidadMaxima--;
+        else
+        {
+            Console.WriteLine("NO SE HAN GUARDADO DISCOS AÚN");
+        }
     }
 
     public void MostrarDisco()
@@ -80,20 +87,24 @@ public class Disquera
         Console.Clear();
         Console.WriteLine("Nombre del disco a buscar (Escriba 'todos' para mostrar todos los discos):");
         String sDisco = Console.ReadLine();
-        if (sDisco == "todos")
-        {
-            for (int i = 0; i < this.discos.Length; i++)
+        if (this.discos.Length > 0) {
+            if (sDisco == "todos")
             {
-                Console.WriteLine($"Nombre: {this.discos[i].sNombreDisco} | Precio: ${this.discos[i].dPrecio} | Cantidad de canciones: {this.discos[i].nCantidadCanciones} | Fecha: {this.discos[i].doFechaCompra.ToString("dd/MM/yyyy")}");
+                for (int i = 0; i < this.discos.Length; i++)
+                {
+                    Console.WriteLine($"Nombre: {this.discos[i].sNombreDisco} | Precio: ${this.discos[i].dPrecio} | Cantidad de canciones: {this.discos[i].nCantidadCanciones} | Fecha: {this.discos[i].doFechaCompra.ToString("dd/MM/yyyy")}");
+                }
             }
-        }
-        else
-        {
-            Int32[] nIndices = this.BuscarDisco(sDisco);
-            for (int i = 0; i < nIndices.Length; i++)
+            else
             {
-                Console.WriteLine($"Nombre: {this.discos[nIndices[i]].sNombreDisco} | Precio: ${this.discos[nIndices[i]].dPrecio} | Cantidad de canciones: {this.discos[nIndices[i]].nCantidadCanciones} | Fecha: {this.discos[nIndices[i]].doFechaCompra.ToString("dd/MM/yyyy")}");
+                Int32[] nIndices = this.BuscarDisco(sDisco);
+                for (int i = 0; i < nIndices.Length; i++)
+                {
+                    Console.WriteLine($"Nombre: {this.discos[nIndices[i]].sNombreDisco} | Precio: ${this.discos[nIndices[i]].dPrecio} | Cantidad de canciones: {this.discos[nIndices[i]].nCantidadCanciones} | Fecha: {this.discos[nIndices[i]].doFechaCompra.ToString("dd/MM/yyyy")}");
+                }
             }
+        } else {
+            Console.WriteLine("NO SE HA GUARDADO NINGÚN DISCO AÚN");
         }
         Console.WriteLine("Presione cualquier tecla para volver...");
         Console.ReadKey();
